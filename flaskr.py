@@ -1,6 +1,7 @@
 from contextlib import closing
 
 import sqlite3
+import json
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
 
 # configuration
@@ -37,6 +38,12 @@ def show_entries():
     cur = g.db.execute('select title, text from entries order by id desc')
     entries = [dict(title=row[0], text=row[1]) for row in cur.fetchall()]
     return render_template('show_entries.html', entries=entries)
+
+@app.route('/getEntries')
+def get_entries():
+    cur = g.db.execute('select title, text from entries order by id desc')
+    entries = [dict(title=row[0], text=row[1]) for row in cur.fetchall()]
+    return json.dumps(entries, ensure_ascii=False)
 
 @app.route('/add', methods = ['POST'])
 def add_entry():
