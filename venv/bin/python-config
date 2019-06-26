@@ -1,4 +1,4 @@
-#!/Users/zhaopeng/Code/PythonProjects/flaskr/venv/bin/python
+#!/python/flaskr/venv/bin/python
 
 import sys
 import getopt
